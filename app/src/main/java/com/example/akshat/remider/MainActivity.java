@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.akshat.remider.data.dbContract;
 import com.example.akshat.remider.data.dbHelper;
@@ -19,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText name;
     private EditText status;
     private SQLiteDatabase mDb;
-    private final static String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +50,18 @@ public class MainActivity extends AppCompatActivity {
         addData(name.getText().toString(),status.getText().toString());
         mAdapter.swapCursor(mDb.query(dbContract.dbEntry.TABLE_NAME,null,null,null,null,null,dbContract.dbEntry._ID));
 
+
         status.clearFocus();
         name.getText().clear();
         status.getText().clear();
     }
 
-    private void addData (String l_name, String l_status) {
+    private long addData (String l_name, String l_status) {
         ContentValues cv = new ContentValues();
         cv.put (dbContract.dbEntry.COLUMN_NAME,l_name);
         cv.put(dbContract.dbEntry.COLUMN_STATUS,l_status);
-        mDb.insert(dbContract.dbEntry.TABLE_NAME,null,cv);
+        //Toast.makeText(getApplicationContext(),"add "+l_name, Toast.LENGTH_SHORT).show();
+        return mDb.insert(dbContract.dbEntry.TABLE_NAME,null,cv);
 
     }
 }

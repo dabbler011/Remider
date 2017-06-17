@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.akshat.remider.data.dbContract;
 
@@ -41,9 +42,18 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
 
         String name = mCursor.getString(mCursor.getColumnIndex(dbContract.dbEntry.COLUMN_NAME));
         long id = mCursor.getLong(mCursor.getColumnIndex(dbContract.dbEntry._ID));
+        //Toast.makeText(mContext.getApplicationContext(),name,Toast.LENGTH_SHORT).show();
         holder.name.setText(name);
         holder.itemView.setTag(id);
+
     }
+
+    @Override
+    public int getItemCount() {
+
+        return mCursor.getCount();
+    }
+
 
     public void swapCursor (Cursor newCursor) {
         if(mCursor!=null){
@@ -53,11 +63,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
         if(newCursor!=null){
             this.notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public int getItemCount() {
-       return mCursor.getCount();
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder{
