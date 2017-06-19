@@ -26,7 +26,7 @@ public class dbHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_TABLE = "CREATE TABLE "+ dbContract.dbEntry.TABLE_NAME+ " ("+dbContract.dbEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+dbContract.dbEntry.COLUMN_NAME + " TEXT NOT NULL, "+dbContract.dbEntry.COLUMN_STATUS + " TEXT NOT NULL);";
+        final String SQL_CREATE_TABLE = "CREATE TABLE "+ dbContract.dbEntry.TABLE_NAME+ " ("+dbContract.dbEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+dbContract.dbEntry.COLUMN_NAME + " TEXT UNIQUE NOT NULL, "+dbContract.dbEntry.COLUMN_STATUS + " TEXT NOT NULL);";
         db.execSQL(SQL_CREATE_TABLE);
     }
 }
