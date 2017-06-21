@@ -70,8 +70,9 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
     }
 
     public interface DataAdapterOnClickListner {
-        void onClick (String dataName);
+        void onClick (String dataName,int position);
     }
+    
 
     private final DataAdapterOnClickListner dataClicker;
 
@@ -86,10 +87,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
 
         @Override
         public void onClick(View v) {
-            //int aa = getAdapterPosition();
+            int position = getAdapterPosition();
             String holderName = this.name.getText().toString();
             Log.v("maa","maamam");
-            dataClicker.onClick(holderName);
+            dataClicker.onClick(holderName,position);
             notifyDataSetChanged();
 
         }

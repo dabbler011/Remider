@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -16,6 +18,7 @@ public class StatusActivity extends AppCompatActivity {
 
     private TextView Name;
     private TextView Status;
+    private Button Remove;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class StatusActivity extends AppCompatActivity {
 
         Name = (TextView)findViewById(R.id.title);
         Status = (TextView)findViewById(R.id.status);
+        Remove = (Button)findViewById(R.id.remove);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("NAME");
@@ -37,5 +41,17 @@ public class StatusActivity extends AppCompatActivity {
         Log.v(name,status);
         Name.setText(name);
         Status.setText(status);
+
+        Remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(MainActivity.num,"1");
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
     }
+
+
 }
